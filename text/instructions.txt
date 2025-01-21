@@ -1,0 +1,106 @@
+1. This project was mainly inspired by this [video](https://youtu.be/oL1yc0BuqL0?si=0olq0OiS8HuT6Pan).
+
+2. These are both great videos to learn and understand graphql. The first video is by an IBM software engineer named \"Martin Keen\". I've met him IRL before, he's a nice guy and very knowledgeable.
+
+GraphQL vs REST -> https://youtu.be/PTfZcN20fro?si=PcVCOl_u21sBMS8K
+
+GraphQL in 100 Seconds -> https://youtu.be/eIQh02xuVw4?si=5V8F6z17yf1xPVAw
+
+3. Create your project 
+
+mkdir test_graphql
+
+4. Create and activate your virtual environment.
+
+cd test_graphql
+virtualenv venv
+source venv/bin/activate
+
+5. Install the following libraries.
+
+pip3 install fastapi
+pip3 install sqlmodel
+pip3 install strawberry-graphql
+pip3 install requests
+pip3 install uvicorn
+
+6. In VSCode install the following extensions if you haven't already.
+
+SQLite by alexcvzz https://marketplace.visualstudio.com/items?itemName=alexcvzz.vscode-sqlite
+
+SQLite Viewer by Florian Klampfer https://marketplace.visualstudio.com/items?itemName=qwtel.sqlite-viewer
+
+7. 
+
+
+
+
+
+Run your application using the following code
+cd test_graphql
+source venv/bin/activate
+uvicorn main:app --reload
+
+
+
+The app should start running on the following port.
+http://127.0.0.1:8000
+
+To see the docs open the following url in your browser.
+http://127.0.0.1:8000/docs
+
+
+After you've looked at the docs, open this link in your browser. Note the /graphql at the end of it.
+http://127.0.0.1:8000/graphql
+
+Delete all the text in the text area that starts with \"Welcome to GraphiQL\".
+
+
+
+
+In the text area paste the following mutation. Then press the purple run button. 
+It should return a \"data\" object that looks exactly like the mutation.
+createUser is the function being called. 
+The id, name, and email are the values that will be returned from the function.
+
+mutation {
+    createUser(name: "Alice", email: "alice@example.com") {
+        id
+        name
+        email
+    }
+}
+
+In the text area paste this new mutation and click the run button. This will be used to create a post.
+
+mutation {
+    createPost(title: "New Post", content: "This is a new post.", authorId: 2) {
+        id
+        title
+        content
+    }
+}
+
+
+
+
+
+cd test_graphql
+mkdir database
+mkdir mutations
+mkdir queries
+
+touch database/db.py
+touch database/models.py
+
+touch mutations/PostMutation.py
+touch mutations/UserMutation.py
+
+touch queries/PostQuery.py
+touch queries/UserQuery.py
+
+touch graphql_classes.py
+touch graphql_schema.py
+touch graphql_types.py
+
+touch main.py
