@@ -29,6 +29,7 @@ app.include_router(graphql_app, prefix='/graphql')
 
 
 # DO NOT INCLUDE THIS FUNC IN THE INSTRUCTIONS
+# ALSO REMOVE ASSOCIATED IMPORTS
 @app.get('/', response_class=HTMLResponse)
 async def serve_html():
     html_file = pathlib.Path('welcome/welcome_page.html')
