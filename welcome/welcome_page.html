@@ -1,8 +1,12 @@
-<div v-scope="{ message: 'Hello from Petite Vue!' }" class="container">
+<div v-scope="{
+    author: { name: 'Alice', age: 29, nationality: 'British' },
+    book: { title: 'Lord of the Rings', publicationYear: 1954, genre: 'fantasy', authorId: 2 },
+    copyText
+}" class="container">
     <div class="content">
-        <h1 class="hello">Hello World</h1>
-        <button @click="alert(message)" class="btn">Click Me</button>
+        <h1 class="hello">Bookeo GraphQL Api!</h1>
     </div>
+
     <div>
         <a href="/graphql">Go to GraphQL UI</a>
     </div>
@@ -12,28 +16,41 @@
 
     <div class="code-blocks">
         <h2>GraphQL Mutations</h2>
-        <div class="code-block">
-            <pre><code>mutation {
-    createAuthor(name: "Alice", age: 29, nationality: "British") {
+
+        <div class="mutation-block">
+            <h3>Create Author</h3>
+            <div class="code-block">
+                <pre><code>mutation {
+    createAuthor(name: "{{ author.name }}", age: {{ author.age }}, nationality: "{{ author.nationality }}") {
         id
         name
         age
         nationality
     }
 }</code></pre>
-            <button @click='copyText($event, `mutation {
-    createAuthor(name: "Alice", age: 29, nationality: "British") {
-        id
-        name
-        age
-        nationality
-    }
-}`)' class="copy-btn">Copy</button>
+                <button @click='copyText($event, `mutation {\n    createAuthor(name: "${author.name}", age: ${author.age}, nationality: "${author.nationality}") {\n        id\n        name\n        age\n        nationality\n    }\n}`)' class="copy-btn">Copy</button>
+            </div>
+        </div>
+        <div class="inputs">
+            <label>
+                Name:
+                <input type="text" v-model="author.name">
+            </label>
+            <label>
+                Age:
+                <input type="number" v-model="author.age">
+            </label>
+            <label>
+                Nationality:
+                <input type="text" v-model="author.nationality">
+            </label>
         </div>
 
-        <div class="code-block">
-            <pre><code>mutation {
-    createBook(title: "Lord of the Rings", publicationYear: 1954, genre: "fantasy", authorId: 2) {
+        <div class="mutation-block">
+            <h3>Create Book</h3>
+            <div class="code-block">
+                <pre><code>mutation {
+    createBook(title: "{{ book.title }}", publicationYear: {{ book.publicationYear }}, genre: "{{ book.genre }}", authorId: {{ book.authorId }}) {
         id
         title
         publicationYear
@@ -41,18 +58,30 @@
         authorId
     }
 }</code></pre>
-            <button @click='copyText($event, `mutation {
-    createBook(title: "Lord of the Rings", publicationYear: 1954, genre: "fantasy", authorId: 2) {
-        id
-        title
-        publicationYear
-        genre
-        authorId
-    }
-}`)' class="copy-btn">Copy</button>
+                <button @click='copyText($event, `mutation {\n    createBook(title: "${book.title}", publicationYear: ${book.publicationYear}, genre: "${book.genre}", authorId: ${book.authorId}) {\n        id\n        title\n        publicationYear\n        genre\n        authorId\n    }\n}`)' class="copy-btn">Copy</button>
+            </div>
+        </div>
+        <div class="inputs">
+            <label>
+                Title:
+                <input type="text" v-model="book.title">
+            </label>
+            <label>
+                Publication Year:
+                <input type="number" v-model="book.publicationYear">
+            </label>
+            <label>
+                Genre:
+                <input type="text" v-model="book.genre">
+            </label>
+            <label>
+                Author ID:
+                <input type="number" v-model="book.authorId">
+            </label>
         </div>
 
         <h2>GraphQL Queries</h2>
+
         <div class="code-block">
             <pre><code>query {
     getAuthor(id: 1) {
@@ -63,15 +92,7 @@
         books
     }
 }</code></pre>
-            <button @click="copyText($event, `query {
-    getAuthor(id: 1) {
-        id
-        name
-        age
-        nationality
-        books
-    }
-}`)" class="copy-btn">Copy</button>
+            <button @click="copyText($event, `query {\n    getAuthor(id: 1) {\n        id\n        name\n        age\n        nationality\n        books\n    }\n}`)" class="copy-btn">Copy</button>
         </div>
 
         <div class="code-block">
@@ -90,21 +111,7 @@
         }
     }
 }</code></pre>
-            <button @click="copyText($event, `query {
-    getAllAuthors {
-        id
-        name
-        age
-        nationality
-        books {
-          id
-          title
-          publicationYear
-          genre
-          authorId
-        }
-    }
-}`)" class="copy-btn">Copy</button>
+            <button @click="copyText($event, `query {\n    getAllAuthors {\n        id\n        name\n        age\n        nationality\n        books {\n          id\n          title\n          publicationYear\n          genre\n          authorId\n        }\n    }\n}`)" class="copy-btn">Copy</button>
         </div>
 
         <div class="code-block">
@@ -117,15 +124,7 @@
         authorId
     }
 }</code></pre>
-            <button @click="copyText($event, `query {
-    getBook(id: 1) {
-        id
-        title
-        publicationYear
-        genre
-        authorId
-    }
-}`)" class="copy-btn">Copy</button>
+            <button @click="copyText($event, `query {\n    getBook(id: 1) {\n        id\n        title\n        publicationYear\n        genre\n        authorId\n    }\n}`)" class="copy-btn">Copy</button>
         </div>
 
         <div class="code-block">
@@ -138,15 +137,7 @@
         authorId
     }
 }</code></pre>
-            <button @click="copyText($event, `query {
-    getAllBooks {
-        id
-        title
-        publicationYear
-        genre
-        authorId
-    }
-}`)" class="copy-btn">Copy</button>
+            <button @click="copyText($event, `query {\n    getAllBooks {\n        id\n        title\n        publicationYear\n        genre\n        authorId\n    }\n}`)" class="copy-btn">Copy</button>
         </div>
     </div>
 </div>
@@ -159,7 +150,7 @@ function copyText(event, text) {
         const button = event.target;
         button.style.backgroundColor = '#16A800';
         button.textContent = 'Copied!';
-        
+
         // Reset the button after 2 seconds
         setTimeout(() => {
             button.style.backgroundColor = '#007bff';
@@ -169,15 +160,25 @@ function copyText(event, text) {
 }
 
 PetiteVue.createApp({
-    copyText
+    copyText,
+    author: { name: 'Alice', age: 29, nationality: 'British' },
+    book: { title: 'Lord of the Rings', publicationYear: 1954, genre: 'fantasy', authorId: 2 }
 }).mount();
 </script>
 
-
 <style>
 .container {
     font-family: Arial, sans-serif;
     padding: 20px;
+}
+
+.inputs {
+    margin-bottom: 10px;
+}
+
+.inputs label {
+    display: block;
+    margin-bottom: 5px;
 }
 
 .code-blocks {
@@ -217,50 +218,6 @@ pre {
 }
 </style>
 
-
-
-<style>
-.container {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-}
-
-.code-blocks {
-    margin-top: 20px;
-}
-
-.code-block {
-    position: relative;
-    margin-bottom: 20px;
-    background-color: black;
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
-}
-
-pre {
-    margin: 0;
-    overflow-x: auto;
-}
-
-.copy-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-}
-
-.copy-btn:hover {
-    background-color: #0056b3;
-}
-</style>
 
 
 
