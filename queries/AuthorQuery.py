@@ -1,13 +1,40 @@
 from fastapi import HTTPException
-from sqlmodel import Session
+from sqlmodel import Session, select
 import strawberry
-from graphql_types import AuthorType
+from graphql_types import AuthorType, BookType
 from database.models import Author
 from database.db import engine
 
+
 @strawberry.type
 class AuthorQuery:
-    
+
+    @strawberry.field
+    def get_all_authors(self) -> list[AuthorType]:
+        with Session(engine) as session:
+            statement = select(Author)
+            results = session.exec(statement).all()
+
+            return [
+                AuthorType(
+                    id=author.id,
+                    name=author.name,
+                    age=author.age,
+                    nationality=author.nationality,
+                    books=[
+                        BookType(
+                            id=book.id,
+                            title=book.title,
+                            publicationYear=book.publicationYear,
+                            genre=book.genre,
+                            author_id=book.author_id
+                        )
+                        for book in author.books
+                    ]
+                )
+                for author in results
+            ]
+        
     @strawberry.field
     def get_author(self, id: int) -> AuthorType:
         with Session(engine) as session:
@@ -17,10 +44,18 @@ class AuthorQuery:
                 raise HTTPException(status_code=404, detail="Author not found")
             
             return AuthorType(
-                id=author.id, 
-                name=author.name, 
+                id=author.id,
+                name=author.name,
                 age=author.age,
                 nationality=author.nationality,
-                books=[]
+                books=[
+                    BookType(
+                        id=book.id,
+                        title=book.title,
+                        publicationYear=book.publicationYear,
+                        genre=book.genre,
+                        author_id=book.author_id
+                    )
+                    for book in author.books
+                ]
             )
-            

@@ -11,6 +11,7 @@ class AuthorMutation:
     def create_author(self, name: str, age: int, nationality: str) -> AuthorType:
         with Session(engine) as session:
             new_author = Author(name=name, age=age, nationality=nationality)
+            
             session.add(new_author)
             session.commit()
             session.refresh(new_author)

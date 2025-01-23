@@ -11,9 +11,11 @@ class BookMutation:
     def create_book(self, title: str, publicationYear: int, genre: str, author_id: int) -> BookType:
         with Session(engine) as session:
             new_book = Book(title=title, publicationYear=publicationYear, genre=genre, author_id=author_id)
+            
             session.add(new_book)
             session.commit()
             session.refresh(new_book)
+
             return BookType(
                 id=new_book.id, 
                 title=new_book.title, 

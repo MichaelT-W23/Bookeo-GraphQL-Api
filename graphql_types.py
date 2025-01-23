@@ -5,7 +5,9 @@ import strawberry
 class BookType:
     id: int
     title: str
-    content: str
+    publicationYear: int
+    genre: str
+    author_id: int
 
 @strawberry.type
 class AuthorType:

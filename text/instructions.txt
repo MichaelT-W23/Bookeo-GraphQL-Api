@@ -75,12 +75,12 @@ mutation {
 In the text area paste this new mutation and click the run button. This will be used to create a book.
 
 mutation {
-    createBook(title: "New Book", publicationYear: 1973, genre: "horror", authorId: 2) {
+    createBook(title: "Lord of the Rings", publicationYear: 1954, genre: "fantasy", authorId: 2) {
         id
         title
         publicationYear
         genre
-        author_id
+        authorId
     }
 }
 
@@ -88,7 +88,7 @@ mutation {
 You can use this query to get an author.
 
 query {
-    get_author(id: 1) {
+    getAuthor(id: 1) {
         id
         name
         age
@@ -97,18 +97,43 @@ query {
     }
 }
 
+query {
+    getAllAuthors {
+        id
+        name
+        age
+        nationality
+        books {
+          id
+          title
+          publicationYear
+          genre
+          authorId
+        }
+    }
+}
+
 You can use this query to get a book. 
 
 query {
-    get_book(id: 1) {
+    getBook(id: 1) {
         id
         title
         publicationYear
         genre
-        author_id
+        authorId
     }
 }
 
+query {
+    getAllBooks {
+        id
+        title
+        publicationYear
+        genre
+        authorId
+    }
+}
 
 
 cd test_graphql
