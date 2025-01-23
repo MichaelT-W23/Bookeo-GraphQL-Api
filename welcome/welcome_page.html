@@ -21,7 +21,7 @@
         nationality
     }
 }</code></pre>
-            <button @click='copyText(`mutation {
+            <button @click='copyText($event, `mutation {
     createAuthor(name: "Alice", age: 29, nationality: "British") {
         id
         name
@@ -41,7 +41,7 @@
         authorId
     }
 }</code></pre>
-            <button @click='copyText(`mutation {
+            <button @click='copyText($event, `mutation {
     createBook(title: "Lord of the Rings", publicationYear: 1954, genre: "fantasy", authorId: 2) {
         id
         title
@@ -63,7 +63,7 @@
         books
     }
 }</code></pre>
-            <button @click="copyText(`query {
+            <button @click="copyText($event, `query {
     getAuthor(id: 1) {
         id
         name
@@ -90,7 +90,7 @@
         }
     }
 }</code></pre>
-            <button @click="copyText(`query {
+            <button @click="copyText($event, `query {
     getAllAuthors {
         id
         name
@@ -117,7 +117,7 @@
         authorId
     }
 }</code></pre>
-            <button @click="copyText(`query {
+            <button @click="copyText($event, `query {
     getBook(id: 1) {
         id
         title
@@ -138,7 +138,7 @@
         authorId
     }
 }</code></pre>
-            <button @click="copyText(`query {
+            <button @click="copyText($event, `query {
     getAllBooks {
         id
         title
@@ -154,8 +154,18 @@
 <script src="https://unpkg.com/petite-vue"></script>
 
 <script>
-function copyText(text) {
-    navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard!'));
+function copyText(event, text) {
+    navigator.clipboard.writeText(text).then(() => {
+        const button = event.target;
+        button.style.backgroundColor = '#16A800';
+        button.textContent = 'Copied!';
+        
+        // Reset the button after 2 seconds
+        setTimeout(() => {
+            button.style.backgroundColor = '#007bff';
+            button.textContent = 'Copy';
+        }, 1500);
+    });
 }
 
 PetiteVue.createApp({
@@ -199,6 +209,52 @@ pre {
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.copy-btn:hover {
+    background-color: #0056b3;
+}
+</style>
+
+
+
+<style>
+.container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.code-blocks {
+    margin-top: 20px;
+}
+
+.code-block {
+    position: relative;
+    margin-bottom: 20px;
+    background-color: black;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+pre {
+    margin: 0;
+    overflow-x: auto;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
 }
 
 .copy-btn:hover {
