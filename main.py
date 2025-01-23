@@ -1,6 +1,8 @@
 from contextlib import asynccontextmanager
+import pathlib
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
 from sqlmodel import SQLModel
 from database.db import engine
 from strawberry.fastapi import GraphQLRouter
@@ -25,3 +27,9 @@ app.add_middleware(
 
 app.include_router(graphql_app, prefix='/graphql')
 
+
+# DO NOT INCLUDE THIS FUNC IN THE INSTRUCTIONS
+@app.get('/', response_class=HTMLResponse)
+async def serve_html():
+    html_file = pathlib.Path('welcome/welcome_page.html')
+    return HTMLResponse(content=html_file.read_text())
