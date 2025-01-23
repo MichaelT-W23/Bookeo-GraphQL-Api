@@ -23,4 +23,17 @@ class BookMutation:
                 genre=new_book.genre, 
                 author_id=new_book.author_id
             )
+    
+    @strawberry.mutation
+    def delete_book(self, book_id: int) -> str:
+        with Session(engine) as session:
+            book_to_delete = session.get(Book, book_id)
+
+            if not book_to_delete:
+                return f"Book with ID {book_id} does not exist."
+            
+            session.delete(book_to_delete)
+            session.commit()
+            
+            return f"Book with ID {book_id} has been successfully deleted."
         

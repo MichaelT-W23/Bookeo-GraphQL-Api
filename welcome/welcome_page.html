@@ -85,6 +85,15 @@
         </div>
 
 
+        <div v-for="mutation in simpleMutations" :key="mutation.title" class="query-block">
+            <h3>{{ mutation.title }}</h3>
+            <div class="code-block">
+                <pre><code>{{ mutation.code }}</code></pre>
+                <button @click='copyText($event, mutation.code)' class="copy-btn">Copy</button>
+            </div>
+        </div>
+
+
         <!-- GraphQL Queries -->
         <h2 class="section-title">GraphQL Queries</h2>
 
@@ -116,6 +125,21 @@ const copyText = (event, text) => {
         }, 1500);
     });
 }
+
+const simpleMutations = [
+    {
+      title: "Delete Author By ID",
+      code: `mutation {
+    deleteAuthor(authorId: 1)
+}`
+    },
+    {
+      title: "Delete Book By ID",
+      code: `mutation {
+    deleteBook(bookId: 1)
+}`
+  }
+]
 
 const queries = [
   {

@@ -84,6 +84,15 @@ mutation {
     }
 }
 
+mutation {
+  deleteAuthor(authorId: 1)
+}
+
+mutation {
+  deleteBook(bookId: 1)
+}
+
+
 
 You can use this query to get an author.
 
