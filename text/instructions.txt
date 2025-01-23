@@ -136,6 +136,17 @@ query {
 }
 
 
+You can all it using 
+http://127.0.0.1:8000/grapqhl
+
+https://marketplace.visualstudio.com/items?itemName=mquandalle.graphql
+
+Postman 
+New HTTP Request -> Body -> GraphQL
+
+
+
+
 cd test_graphql
 mkdir database
 mkdir mutations
