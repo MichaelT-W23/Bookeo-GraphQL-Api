@@ -4,12 +4,13 @@
     copyText
 }" class="container">
     <div class="content">
-        <h1 class="hello">Bookeo GraphQL Api!</h1>
+        <h1 class="hello">Bookeo GraphQL Api</h1>
     </div>
 
     <div class="links">
         <a href="/graphql" class="link">Go to GraphQL UI</a>
         <a href="/docs" class="link">Go to Docs</a>
+        <a href="https://github.com/MichaelT-W23/Bookeo-GraphQL-Api" class="link">Go to Github Repo</a>
     </div>
 
     <div class="code-blocks">
@@ -89,7 +90,13 @@
         name
         age
         nationality
-        books
+        books {
+          id
+          title
+          publicationYear
+          genre
+          authorId
+        }
     }
 }</code></pre>
             <button @click="copyText($event, `query {\n    getAuthor(id: 1) {\n        id\n        name\n        age\n        nationality\n        books\n    }\n}`)" class="copy-btn">Copy</button>
@@ -173,6 +180,7 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #f8b195, #f67280, #c06c84);
+    /* background: linear-gradient(135deg, #a2d9ff, #73bdfd, #4086e8); */
     color: #fff;
     min-height: 100vh;
 }
