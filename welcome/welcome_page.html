@@ -3,17 +3,213 @@
         <h1 class="hello">Hello World</h1>
         <button @click="alert(message)" class="btn">Click Me</button>
     </div>
+    <div>
+        <a href="/graphql">Go to GraphQL UI</a>
+    </div>
+    <div>
+        <a href="/docs">Go to Docs</a>
+    </div>
+
+    <div class="code-blocks">
+        <h2>GraphQL Mutations</h2>
+        <div class="code-block">
+            <pre><code>mutation {
+    createAuthor(name: "Alice", age: 29, nationality: "British") {
+        id
+        name
+        age
+        nationality
+    }
+}</code></pre>
+            <button @click='copyText(`mutation {
+    createAuthor(name: "Alice", age: 29, nationality: "British") {
+        id
+        name
+        age
+        nationality
+    }
+}`)' class="copy-btn">Copy</button>
+        </div>
+
+        <div class="code-block">
+            <pre><code>mutation {
+    createBook(title: "Lord of the Rings", publicationYear: 1954, genre: "fantasy", authorId: 2) {
+        id
+        title
+        publicationYear
+        genre
+        authorId
+    }
+}</code></pre>
+            <button @click='copyText(`mutation {
+    createBook(title: "Lord of the Rings", publicationYear: 1954, genre: "fantasy", authorId: 2) {
+        id
+        title
+        publicationYear
+        genre
+        authorId
+    }
+}`)' class="copy-btn">Copy</button>
+        </div>
+
+        <h2>GraphQL Queries</h2>
+        <div class="code-block">
+            <pre><code>query {
+    getAuthor(id: 1) {
+        id
+        name
+        age
+        nationality
+        books
+    }
+}</code></pre>
+            <button @click="copyText(`query {
+    getAuthor(id: 1) {
+        id
+        name
+        age
+        nationality
+        books
+    }
+}`)" class="copy-btn">Copy</button>
+        </div>
+
+        <div class="code-block">
+            <pre><code>query {
+    getAllAuthors {
+        id
+        name
+        age
+        nationality
+        books {
+          id
+          title
+          publicationYear
+          genre
+          authorId
+        }
+    }
+}</code></pre>
+            <button @click="copyText(`query {
+    getAllAuthors {
+        id
+        name
+        age
+        nationality
+        books {
+          id
+          title
+          publicationYear
+          genre
+          authorId
+        }
+    }
+}`)" class="copy-btn">Copy</button>
+        </div>
+
+        <div class="code-block">
+            <pre><code>query {
+    getBook(id: 1) {
+        id
+        title
+        publicationYear
+        genre
+        authorId
+    }
+}</code></pre>
+            <button @click="copyText(`query {
+    getBook(id: 1) {
+        id
+        title
+        publicationYear
+        genre
+        authorId
+    }
+}`)" class="copy-btn">Copy</button>
+        </div>
+
+        <div class="code-block">
+            <pre><code>query {
+    getAllBooks {
+        id
+        title
+        publicationYear
+        genre
+        authorId
+    }
+}</code></pre>
+            <button @click="copyText(`query {
+    getAllBooks {
+        id
+        title
+        publicationYear
+        genre
+        authorId
+    }
+}`)" class="copy-btn">Copy</button>
+        </div>
+    </div>
 </div>
 
 <script src="https://unpkg.com/petite-vue"></script>
 
-
 <script>
-PetiteVue.createApp().mount();
+function copyText(text) {
+    navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard!'));
+}
+
+PetiteVue.createApp({
+    copyText
+}).mount();
 </script>
 
 
 <style>
+.container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.code-blocks {
+    margin-top: 20px;
+}
+
+.code-block {
+    position: relative;
+    margin-bottom: 20px;
+    background-color: black;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+pre {
+    margin: 0;
+    overflow-x: auto;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.copy-btn:hover {
+    background-color: #0056b3;
+}
+</style>
+
+
+
+
+<!-- <style>
 .container {
     display: flex;
     justify-content: center;
@@ -60,4 +256,4 @@ PetiteVue.createApp().mount();
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
 
-</style>
+</style> -->
