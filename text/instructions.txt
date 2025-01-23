@@ -64,24 +64,50 @@ createAuthor is the function being called.
 The id, name, and email are the values that will be returned from the function.
 
 mutation {
-    createAuthor(name: "Alice", email: "alice@example.com") {
+    createAuthor(name: "Alice", age: 29, nationality: "British") {
         id
         name
-        email
+        age
+        nationality
     }
 }
 
 In the text area paste this new mutation and click the run button. This will be used to create a book.
 
 mutation {
-    createBook(title: "New Book", content: "This is a new book.", authorId: 2) {
+    createBook(title: "New Book", publicationYear: 1973, genre: "horror", authorId: 2) {
         id
         title
-        content
+        publicationYear
+        genre
+        author_id
     }
 }
 
 
+You can use this query to get an author.
+
+query {
+    get_author(id: 1) {
+        id
+        name
+        age
+        nationality
+        books
+    }
+}
+
+You can use this query to get a book. 
+
+query {
+    get_book(id: 1) {
+        id
+        title
+        publicationYear
+        genre
+        author_id
+    }
+}
 
 
 

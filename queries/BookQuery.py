@@ -16,6 +16,10 @@ class BookQuery:
             if not book:
                 raise HTTPException(status_code=404, detail='Book not found')
             
-            return BookType(id=book.id, title=book.title, content=book.content)
-        
-    
+            return BookType(
+                id=book.id, 
+                title=book.title, 
+                publicationYear=book.publicationYear,
+                genre=book.genre, 
+                author_id=book.author_id
+            )

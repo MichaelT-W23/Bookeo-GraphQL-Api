@@ -11,5 +11,6 @@ class BookType:
 class AuthorType:
     id: int
     name: str
-    email: str
+    age: int
+    nationality: str
     books: List[BookType]

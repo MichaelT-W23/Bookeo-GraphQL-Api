@@ -16,5 +16,11 @@ class AuthorQuery:
             if not author:
                 raise HTTPException(status_code=404, detail="Author not found")
             
-            return AuthorType(id=author.id, name=author.name, email=author.email, books=author.books)
+            return AuthorType(
+                id=author.id, 
+                name=author.name, 
+                age=author.age,
+                nationality=author.nationality,
+                books=[]
+            )
             

@@ -20,11 +20,12 @@ touch apollo-client.js
     <div v-if="loading">Loading...</div>
     <div v-else-if="error">Error: {{ error.message }}</div>
     <div v-else>
-      <h2>User Details</h2>
+      <h2>Author Details</h2>
       <ul>
-        <li>ID: {{ user.id }}</li>
-        <li>Name: {{ user.name }}</li>
-        <li>Email: {{ user.email }}</li>
+        <li>ID: {{ author.id }}</li>
+        <li>Name: {{ author.name }}</li>
+        <li>Age: {{ author.age }}</li>
+        <li>Nationality: {{ author.nationality }}</li>
       </ul>
     </div>
   </div>
@@ -36,21 +37,22 @@ import { useQuery } from '@vue/apollo-composable';
 import { gql } from '@apollo/client';
 
 // Define the GraphQL query
-const GET_USER = gql`
+const GET_AUTHOR = gql`
   query {
-    getUser(id: 1) {
+    getAuthor(id: 1) {
       id
       name
-      email
+      age
+      nationality
     }
   }
 `;
 
 // Execute the query using Apollo
-const { result: data, loading, error } = useQuery(GET_USER);
+const { result: data, loading, error } = useQuery(GET_AUTHOR);
 
-// Extract the user data from the result
-const user = computed(() => data?.value?.getUser);
+// Extract the author data from the result
+const author = computed(() => data?.value?.getAuthor);
 </script>
 
 
