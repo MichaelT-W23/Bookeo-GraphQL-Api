@@ -1,20 +1,20 @@
 from fastapi import HTTPException
 from sqlmodel import Session
 import strawberry
-from graphql_types import UserType
-from database.models import User
+from graphql_types import AuthorType
+from database.models import Author
 from database.db import engine
 
 @strawberry.type
-class UserQuery:
+class AuthorQuery:
     
     @strawberry.field
-    def get_user(self, id: int) -> UserType:
+    def get_author(self, id: int) -> AuthorType:
         with Session(engine) as session:
-            user = session.get(User, id)
+            author = session.get(Author, id)
 
-            if not user:
-                raise HTTPException(status_code=404, detail="User not found")
+            if not author:
+                raise HTTPException(status_code=404, detail="Author not found")
             
-            return UserType(id=user.id, name=user.name, email=user.email, posts=user.posts)
+            return AuthorType(id=author.id, name=author.name, email=author.email, books=author.books)
             

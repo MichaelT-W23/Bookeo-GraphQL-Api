@@ -6,7 +6,7 @@ def collect_resolver_classes(directory):
     Returns a tuple of the classes in either the 
     queries or mutations folder.
     
-    (PostMutation, UserMutation)
+    (BookMutation, AuthorMutation)
     """
     module_classes = []
 

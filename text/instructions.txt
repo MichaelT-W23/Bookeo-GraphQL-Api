@@ -60,21 +60,21 @@ Delete all the text in the text area that starts with \"Welcome to GraphiQL\".
 
 In the text area paste the following mutation. Then press the purple run button. 
 It should return a \"data\" object that looks exactly like the mutation.
-createUser is the function being called. 
+createAuthor is the function being called. 
 The id, name, and email are the values that will be returned from the function.
 
 mutation {
-    createUser(name: "Alice", email: "alice@example.com") {
+    createAuthor(name: "Alice", email: "alice@example.com") {
         id
         name
         email
     }
 }
 
-In the text area paste this new mutation and click the run button. This will be used to create a post.
+In the text area paste this new mutation and click the run button. This will be used to create a book.
 
 mutation {
-    createPost(title: "New Post", content: "This is a new post.", authorId: 2) {
+    createBook(title: "New Book", content: "This is a new book.", authorId: 2) {
         id
         title
         content
@@ -93,11 +93,11 @@ mkdir queries
 touch database/db.py
 touch database/models.py
 
-touch mutations/PostMutation.py
-touch mutations/UserMutation.py
+touch mutations/BookMutation.py
+touch mutations/AuthorMutation.py
 
-touch queries/PostQuery.py
-touch queries/UserQuery.py
+touch queries/BookQuery.py
+touch queries/AuthorQuery.py
 
 touch graphql_classes.py
 touch graphql_schema.py

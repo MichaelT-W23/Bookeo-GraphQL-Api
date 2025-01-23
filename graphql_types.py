@@ -2,14 +2,14 @@ from typing import List
 import strawberry
 
 @strawberry.type
-class PostType:
+class BookType:
     id: int
     title: str
     content: str
 
 @strawberry.type
-class UserType:
+class AuthorType:
     id: int
     name: str
     email: str
-    posts: List[PostType]
+    books: List[BookType]
