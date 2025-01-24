@@ -23,19 +23,19 @@
         {
             "title": "Harry Potter and the Chamber of Secrets", 
             "publicationYear": 1998, 
-            "genre": "Fantasy", 
+            "genre": "Adventure", 
             "author_id": 1
         },
         {
             "title": "A Game of Thrones", 
             "publicationYear": 1996, 
-            "genre": "Fantasy", 
+            "genre": "fantasy", 
             "author_id": 2
         },
         {
             "title": "A Clash of Kings", 
             "publicationYear": 1998, 
-            "genre": "Fantasy", 
+            "genre": "History", 
             "author_id": 2
         }
     ]

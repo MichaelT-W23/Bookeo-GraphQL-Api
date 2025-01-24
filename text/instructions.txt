@@ -144,6 +144,19 @@ query {
     }
 }
 
+query {
+    getAllGenres
+}
+
+query {
+    getAllBooks {
+        id
+        title
+        publicationYear
+        genre
+        authorId
+  }
+}
 
 You can all it using 
 http://127.0.0.1:8000/grapqhl

@@ -201,9 +201,26 @@ const queries = [
       authorId
   }
 }`
+  },
+  {
+      title: "Get All Genres",
+      code: `query {
+  getAllGenres
+}`
+  },
+  {
+      title: "Get Books By Genre",
+      code: `query {
+  getBooksByGenre(genre: "Fantasy") {
+      id
+      title
+      publicationYear
+      genre
+      authorId
+  }
+}`
   }
 ];
-
 
 PetiteVue.createApp({
     copyText,
