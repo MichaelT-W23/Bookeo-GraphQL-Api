@@ -1,4 +1,5 @@
 from typing import List, Optional
+from pydantic import field_validator
 from sqlmodel import Field, Relationship, SQLModel
 
 class Book(SQLModel, table=True):
@@ -10,6 +11,13 @@ class Book(SQLModel, table=True):
     author_id: int = Field(foreign_key="author.id")
 
     author: "Author" = Relationship(back_populates="books")
+
+    # this will let us use model_validate
+    @field_validator("genre", mode="before")
+    def capitalize_genre(cls, value: str) -> str:
+        if value:
+            return value.capitalize()
+        return value
 
 class Author(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)

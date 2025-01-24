@@ -1,3 +1,4 @@
+from pydantic import ValidationError
 from sqlmodel import Session
 import strawberry
 from graphql_types import BookType
@@ -9,21 +10,31 @@ class BookMutation:
 
     @strawberry.mutation
     def create_book(self, title: str, publicationYear: int, genre: str, author_id: int) -> BookType:
-        with Session(engine) as session:
-            new_book = Book(title=title, publicationYear=publicationYear, genre=genre, author_id=author_id)
+        try:
+            validated_book = Book.model_validate({
+                "title": title,
+                "publicationYear": publicationYear,
+                "genre": genre,
+                "author_id": author_id
+            })
             
-            session.add(new_book)
-            session.commit()
-            session.refresh(new_book)
+            with Session(engine) as session:
+                session.add(validated_book)
+                session.commit()
+                session.refresh(validated_book)
 
-            return BookType(
-                id=new_book.id, 
-                title=new_book.title, 
-                publicationYear=new_book.publicationYear,
-                genre=new_book.genre, 
-                author_id=new_book.author_id
-            )
-    
+                return BookType(
+                    id=validated_book.id, 
+                    title=validated_book.title, 
+                    publicationYear=validated_book.publicationYear,
+                    genre=validated_book.genre, 
+                    author_id=validated_book.author_id
+                )
+            
+        except ValidationError as e:
+            raise ValueError(f"Validation Error: {e}")
+
+
     @strawberry.mutation
     def delete_book(self, book_id: int) -> str:
         with Session(engine) as session:

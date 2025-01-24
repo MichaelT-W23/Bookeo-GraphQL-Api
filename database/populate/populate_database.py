@@ -15,7 +15,7 @@ def add_authors_and_books(authors, books_dict):
         session.commit()
 
         for book_data in books_dict:
-            book = Book(**book_data)
+            book = Book(**Book.model_validate(book_data).dict())
             session.add(book)
 
         session.commit()
