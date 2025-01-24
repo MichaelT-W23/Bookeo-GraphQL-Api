@@ -12,7 +12,7 @@ class Book(SQLModel, table=True):
 
     author: "Author" = Relationship(back_populates="books")
 
-    # this will let us use model_validate
+    # this will let us use the "model_validate" function
     @field_validator("genre", mode="before")
     def capitalize_genre(cls, value: str) -> str:
         if value:
