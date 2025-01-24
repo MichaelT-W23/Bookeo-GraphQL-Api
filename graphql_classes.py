@@ -5,6 +5,9 @@ def collect_resolver_classes(directory):
     """
     Returns a tuple of the classes in either the 
     queries or mutations folder.
+
+    These are the parameters for query and mutation 
+    in the graphql_schema.py class.
     
     (BookMutation, AuthorMutation)
     """

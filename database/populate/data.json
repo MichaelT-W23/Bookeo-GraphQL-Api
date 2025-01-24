@@ -1,0 +1,42 @@
+{
+    "authors": [
+        {
+            "id": 1,
+            "name": "J.K. Rowling",
+            "age": 57,
+            "nationality": "British"
+        },
+        {
+            "id": 2,
+            "name": "George R.R. Martin",
+            "age": 75,
+            "nationality": "American"
+        }
+    ],
+    "books": [
+        {
+            "title": "Harry Potter and the Philosopher's Stone", 
+            "publicationYear": 1997, 
+            "genre": "Fantasy", 
+            "author_id": 1
+        },
+        {
+            "title": "Harry Potter and the Chamber of Secrets", 
+            "publicationYear": 1998, 
+            "genre": "Fantasy", 
+            "author_id": 1
+        },
+        {
+            "title": "A Game of Thrones", 
+            "publicationYear": 1996, 
+            "genre": "Fantasy", 
+            "author_id": 2
+        },
+        {
+            "title": "A Clash of Kings", 
+            "publicationYear": 1998, 
+            "genre": "Fantasy", 
+            "author_id": 2
+        }
+    ]
+}
